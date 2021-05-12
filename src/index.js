@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+// import Compteur from './pages/Compteur'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
