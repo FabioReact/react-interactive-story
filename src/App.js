@@ -1,13 +1,33 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Title from './components/Title'
 import Content from './components/Content'
 import ChoiceList from './components/ChoiceList'
-import story from './story'
+// import story from './story'
 
 
 function App() {
+  const [story, setStory] = useState([])
 	const [chapterId, setChapterId] = useState(1)
   const [choiceHistory, setChoiceHistory] = useState([])
+
+  useEffect(() => {
+    fetch("/react-interactive-story/story.json", {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        setStory(data)
+      })
+      .catch(e => {
+        // Si erreur
+        console.error(e)
+      })
+  }, [])
+
 	const chapter = story.find(chapter => chapter.id === chapterId)
 
   const selectChoice = (id, choice) => {
